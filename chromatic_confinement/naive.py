@@ -17,7 +17,6 @@ for x in range(K):
 	for y in range(N):
 		base = ns[y]
 		base_dist = dist_squared_3(color, base)
-		print(str(color) + " and " + str(base) + " are " + str(base_dist) + " units apart")
 		if base_dist < guess_dist:	
 			guess = base
 			guess_dist = base_dist
