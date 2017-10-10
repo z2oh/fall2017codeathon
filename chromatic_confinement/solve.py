@@ -18,16 +18,6 @@ def build_kd_tree(vecs, dim, d):
 	tree = Tree()
 	tree.val = vals[mid]
 	tree.dim = dim
-	#print("The value for this node is", str(tree.val))
-	#print("%%%%%")
-	#print(str(mid))
-	#print("%")
-	#print(str(vals))
-	#print("%")
-	#print(str(vals[:mid]))
-	#print("%")
-	#print(str(vals[mid+1:]))
-	#print("%%%%%")
 	tree.left = build_kd_tree(vals[:mid], (dim+1)%d, d)
 	if(tree.left != None):
 		tree.left.parent = tree
@@ -36,16 +26,6 @@ def build_kd_tree(vecs, dim, d):
 		tree.right.parent = tree
 	return tree
 
-def print_tree_in_order(tree):
-	print("ROOT")
-	print(tree.val)
-	if(tree.left != None):
-		print("LEFT")
-		print_tree_in_order(tree.left)
-	if(tree.right != None):
-		print("RIGHT")
-		print_tree_in_order(tree.right)
-	
 
 def dist_squared_3(A, B):
 	return (A[0] - B[0])**2 + (A[1] - B[1])**2 + (A[2] - B[2])**2
@@ -56,14 +36,6 @@ for x in range(N):
 	ns[x] = tuple(map(int, input().split(',')))
 
 tree = build_kd_tree(ns, 0, 3)
-
-#print("VALL")
-#print(str(tree.left.left.val))
-#print(str(tree.right.left.val))
-
-#print("##########")
-#print_tree_in_order(tree)
-#print("##########")
 
 ks = [(0,0,0)] * K
 for x in range(K):
@@ -99,7 +71,6 @@ def find_nearest_neighbor(root, color, top):
 		# If the sphere intersects with the cube of the other half of
 		# the tree we must recurse down it.
 		if(guess_dist > (root.val[root.dim] - color[root.dim])**2):
-			#print("intersection")
 			other = root
 			if(root.left == prev):
 				other = root.right
@@ -121,4 +92,3 @@ for x in range(K):
 	color = ks[x]
 	nn = find_nearest_neighbor(tree, color, tree)	
 	print(nn)
-
